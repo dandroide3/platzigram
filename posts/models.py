@@ -9,14 +9,18 @@ from django.db import models
 class User(models.Model):
     """ User model. """
 
-    email = models.EmailField()
-    password = models.CharField()
+    email = models.EmailField(unique=True)
+    password = models.CharField(max_length=100)
 
-    first_name = models.CharField()
-    last_name = models.CharField()
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
 
-    bio = models.TextField()
+    is_admin = models.BooleanField(default=False)
 
-    birthdate = models.DateField()
+    bio = models.TextField(blank=True)
 
-    created = models.DateTimeField()
+    birthdate = models.DateField(blank=True, null=True)
+
+    # esta almacena la hora tambien
+    created = models.DateTimeField(auto_now_add=True)
+    modifique = models.DateTimeField(auto_now=True)
